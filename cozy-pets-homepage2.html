@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CozyPets – Nassau's Premier Pet Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #1B3D8F;
+      --blue-dark: #0f2460;
+      --blue-mid: #2a52b8;
+      --orange: #F47C20;
+      --orange-light: #FFA040;
+      --cream: #FDF6EC;
+      --warm-white: #FEFAF4;
+      --charcoal: #1a1a2e;
+      --mid-gray: #6b6b80;
+      --light-gray: #e8e4dc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ─── ANNOUNCEMENT BAR ─── */
+    .announcement-bar {
+      background: var(--orange);
+      color: #fff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .announcement-bar span { margin: 0 18px; opacity: 0.75; }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      padding: 0 5%;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--blue);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--orange); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-cta {
+      background: var(--orange);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--blue-dark);
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(244,124,32,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 10% 80%, rgba(43,82,184,0.4) 0%, transparent 50%);
+    }
+    .hero-left {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 8%;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(244,124,32,0.18);
+      border: 1px solid rgba(244,124,32,0.4);
+      color: var(--orange-light);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+    .hero-eyebrow::before { content: '🐾'; font-size: 0.9rem; }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.08;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--orange-light);
+    }
+    .hero-desc {
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 42px;
+      font-weight: 300;
+    }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,124,32,0.4); }
+    .btn-ghost {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: #fff;
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); }
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 52px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--orange-light);
+    }
+    .hero-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    /* Hero Right – Visual Panel */
+    .hero-right {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 8% 60px 0;
+    }
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: center;
+    }
+    .paw-icon { font-size: 4.5rem; display: block; margin-bottom: 16px; line-height: 1; }
+    .hero-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .hero-card-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+      margin-bottom: 28px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .service-pill {
+      background: rgba(244,124,32,0.15);
+      border: 1px solid rgba(244,124,32,0.3);
+      border-radius: 12px;
+      padding: 14px 10px;
+      color: #fff;
+    }
+    .service-pill .sp-icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+    .service-pill .sp-name { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .hero-card-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(27,61,143,0.5);
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.82rem;
+    }
+    .hero-card-badge span { color: var(--orange-light); font-weight: 600; }
+
+    /* Floating badges */
+    .float-badge {
+      position: absolute;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      animation: float 3s ease-in-out infinite;
+    }
+    .float-badge-1 { top: 10%; right: -10%; animation-delay: 0s; }
+    .float-badge-2 { bottom: 18%; left: -8%; animation-delay: 1.5s; }
+    .float-badge .fb-num { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--orange); display: block; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ─── TRUST STRIP ─── */
+    .trust-strip {
+      background: var(--orange);
+      padding: 20px 5%;
+    }
+    .trust-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .trust-item .ti-icon { font-size: 1.4rem; }
+    .trust-item .ti-text { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.03em; }
+    .trust-divider { width: 1px; height: 30px; background: rgba(255,255,255,0.35); }
+
+    /* ─── SECTION WRAPPER ─── */
+    section { padding: 90px 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(244,124,32,0.1);
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(244,124,32,0.25);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      color: var(--blue-dark);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .section-title em { font-style: italic; color: var(--orange); }
+    .section-sub {
+      color: var(--mid-gray);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 560px;
+      font-weight: 300;
+    }
+
+    /* ─── CATEGORIES ─── */
+    .categories-section { background: var(--cream); }
+    .categories-header { text-align: center; margin-bottom: 52px; }
+    .categories-header .section-sub { margin: 0 auto; }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+    .cat-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 20px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.25s;
+      text-decoration: none;
+      color: var(--charcoal);
+      display: block;
+    }
+    .cat-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(244,124,32,0.15);
+    }
+    .cat-emoji { font-size: 2.8rem; display: block; margin-bottom: 14px; }
+    .cat-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+    }
+    .cat-count { font-size: 0.75rem; color: var(--mid-gray); margin-top: 4px; }
+
+    /* ─── WHY US ─── */
+    .why-section { background: var(--warm-white); }
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-visual {
+      position: relative;
+    }
+    .why-main-card {
+      background: var(--blue);
+      border-radius: 24px;
+      padding: 52px 44px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-main-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(244,124,32,0.2);
+      border-radius: 50%;
+    }
+    .why-main-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -30px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .why-big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .why-big-label {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      margin-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .why-accent-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .why-acc-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px 20px;
+      border: 1.5px solid var(--light-gray);
+    }
+    .why-acc-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+    .why-acc-title { font-weight: 700; font-size: 0.9rem; color: var(--blue-dark); }
+    .why-acc-sub { font-size: 0.78rem; color: var(--mid-gray); margin-top: 4px; line-height: 1.5; }
+
+    .why-list { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+    .why-item { display: flex; gap: 20px; align-items: flex-start; }
+    .why-item-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      min-width: 42px;
+    }
+    .why-item-title { font-weight: 700; font-size: 1rem; color: var(--blue-dark); margin-bottom: 6px; }
+    .why-item-desc { font-size: 0.9rem; color: var(--mid-gray); line-height: 1.65; font-weight: 300; }
+
+    /* ─── GROOMING ─── */
+    .grooming-section { background: var(--blue-dark); }
+    .grooming-header { text-align: center; margin-bottom: 56px; }
+    .grooming-header .section-title { color: #fff; }
+    .grooming-header .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto; }
+    .grooming-plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .g-plan {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 40px 32px;
+      position: relative;
+      transition: all 0.25s;
+    }
+    .g-plan:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: var(--orange);
+      transform: translateY(-4px);
+    }
+    .g-plan.featured {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .g-plan-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: var(--blue-dark);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 50px;
+    }
+    .g-plan-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .g-plan-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      min-height: 52px;
+    }
+    .g-plan.featured .g-plan-desc { color: rgba(255,255,255,0.85); }
+    .g-prices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+    .g-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+    }
+    .g-plan.featured .g-price-row { background: rgba(255,255,255,0.15); }
+    .g-size { font-size: 0.82rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+    .g-plan.featured .g-size { color: rgba(255,255,255,0.85); }
+    .g-price { font-weight: 800; color: var(--orange-light); font-size: 0.95rem; }
+    .g-plan.featured .g-price { color: #fff; }
+    .g-book-btn {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.2);
+    }
+    .g-book-btn:hover { background: rgba(255,255,255,0.2); }
+    .g-plan.featured .g-book-btn {
+      background: #fff;
+      color: var(--orange);
+      border-color: transparent;
+    }
+    .g-plan.featured .g-book-btn:hover { background: rgba(255,255,255,0.9); }
+    .grooming-note {
+      text-align: center;
+      margin-top: 32px;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.82rem;
+    }
+    .grooming-note a { color: var(--orange-light); }
+
+    /* ─── PRODUCTS ─── */
+    .products-section { background: var(--cream); }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+    }
+    .view-all-link {
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 2px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .prod-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.25s;
+      border: 1.5px solid transparent;
+    }
+    .prod-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.1); border-color: var(--light-gray); transform: translateY(-4px); }
+    .prod-img-wrap {
+      background: var(--light-gray);
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+    }
+    .prod-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+    }
+    .prod-info { padding: 18px 20px 22px; }
+    .prod-cat { font-size: 0.7rem; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .prod-name { font-weight: 700; font-size: 0.92rem; color: var(--blue-dark); line-height: 1.4; margin-bottom: 10px; }
+    .prod-login { font-size: 0.8rem; color: var(--mid-gray); font-style: italic; }
+    .prod-btn {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+      padding: 9px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .prod-btn:hover { background: var(--blue-mid); }
+
+    /* ─── BRANDS ─── */
+    .brands-section { background: var(--warm-white); padding: 70px 5%; }
+    .brands-header { text-align: center; margin-bottom: 44px; }
+    .brands-ticker-wrap { overflow: hidden; position: relative; }
+    .brands-ticker-wrap::before, .brands-ticker-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+    }
+    .brands-ticker-wrap::before { left: 0; background: linear-gradient(to right, var(--warm-white), transparent); }
+    .brands-ticker-wrap::after { right: 0; background: linear-gradient(to left, var(--warm-white), transparent); }
+    .brands-ticker {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      animation: ticker 22s linear infinite;
+      width: max-content;
+    }
+    .brands-ticker:hover { animation-play-state: paused; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .brand-pill {
+      background: var(--cream);
+      border: 1.5px solid var(--light-gray);
+      border-radius: 50px;
+      padding: 12px 28px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--charcoal);
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .brand-pill:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ─── LOYALTY ─── */
+    .loyalty-section { background: var(--blue); padding: 90px 5%; }
+    .loyalty-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .loyalty-left .section-title { color: #fff; }
+    .loyalty-left .section-sub { color: rgba(255,255,255,0.65); }
+    .loyalty-features {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .lf-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .lf-dot {
+      width: 10px; height: 10px;
+      background: var(--orange);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .lf-text { color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6; }
+    .lf-text strong { color: #fff; }
+    .loyalty-right {
+      display: flex;
+      justify-content: center;
+    }
+    .loyalty-card {
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.14);
+      border-radius: 28px;
+      padding: 44px 40px;
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+    }
+    .lc-icon { font-size: 3.5rem; display: block; margin-bottom: 16px; }
+    .lc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .lc-sub { color: rgba(255,255,255,0.6); font-size: 0.88rem; line-height: 1.6; margin-bottom: 28px; }
+    .lc-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .lc-perk {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+    }
+    .lc-perk::before { content: '✓'; color: var(--orange-light); font-weight: 700; }
+    .lc-btn {
+      display: block;
+      padding: 13px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .lc-btn:hover { background: var(--orange-light); }
+
+    /* ─── DELIVERY ─── */
+    .delivery-section { background: var(--cream); padding: 90px 5%; }
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+    .del-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      border: 1.5px solid var(--light-gray);
+      transition: all 0.25s;
+    }
+    .del-card:hover { border-color: var(--orange); box-shadow: 0 10px 30px rgba(244,124,32,0.12); transform: translateY(-4px); }
+    .del-icon { font-size: 3rem; display: block; margin-bottom: 20px; }
+    .del-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--blue-dark); margin-bottom: 8px; }
+    .del-desc { font-size: 0.88rem; color: var(--mid-gray); line-height: 1.65; font-weight: 300; }
+    .del-desc strong { color: var(--charcoal); font-weight: 600; }
+
+    /* ─── COLLAR HIGHLIGHT ─── */
+    .collar-section { background: var(--warm-white); padding: 90px 5%; }
+    .collar-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .collar-visual {
+      background: linear-gradient(135deg, var(--orange) 0%, #e86510 100%);
+      border-radius: 28px;
+      padding: 56px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .collar-visual::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+    }
+    .collar-emoji { font-size: 5rem; display: block; position: relative; z-index: 1; }
+    .collar-visual-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #fff;
+      margin: 20px 0 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .collar-colors {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .color-dot {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .color-dot:hover { transform: scale(1.2); border-color: #fff; }
+    .collar-features { display: flex; flex-direction: column; gap: 22px; }
+    .cf-item { display: flex; gap: 16px; align-items: flex-start; }
+    .cf-icon {
+      width: 44px; height: 44px;
+      background: var(--cream);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .cf-title { font-weight: 700; font-size: 0.95rem; color: var(--blue-dark); margin-bottom: 4px; }
+    .cf-desc { font-size: 0.84rem; color: var(--mid-gray); line-height: 1.55; font-weight: 300; }
+
+    /* ─── CTA ─── */
+    .cta-section { background: var(--orange); padding: 90px 5%; }
+    .cta-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .cta-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .cta-inner p { color: rgba(255,255,255,0.82); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; font-weight: 300; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-white {
+      background: #fff;
+      color: var(--orange);
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .cta-btn-outline {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ─── CONTACT ─── */
+    .contact-section { background: var(--warm-white); padding: 90px 5%; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 48px;
+      margin-top: 52px;
+    }
+    .contact-brand .section-title { font-size: 2rem; }
+    .contact-brand p { color: var(--mid-gray); font-size: 0.9rem; line-height: 1.7; margin-top: 14px; font-weight: 300; max-width: 300px; }
+    .contact-social { display: flex; gap: 12px; margin-top: 24px; }
+    .social-btn {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .social-btn:hover { background: var(--orange); }
+    .contact-col h4 {
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue-dark);
+      margin-bottom: 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .contact-item-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .contact-item-text { font-size: 0.9rem; color: var(--mid-gray); line-height: 1.5; font-weight: 300; }
+    .contact-item-text strong { color: var(--charcoal); font-weight: 600; display: block; margin-bottom: 2px; }
+    .contact-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .contact-links a { text-decoration: none; color: var(--mid-gray); font-size: 0.9rem; transition: color 0.2s; font-weight: 300; }
+    .contact-links a:hover { color: var(--orange); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--charcoal);
+      padding: 24px 5%;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,0.4); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .hero-left { padding: 80px 5%; }
+      .cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .grooming-plans { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .why-layout, .collar-layout, .loyalty-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .delivery-grid { grid-template-columns: 1fr; max-width: 400px; margin: 52px auto 0; }
+    }
+    @media (max-width: 640px) {
+      .nav-links, .nav-right .nav-cta { display: none; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .products-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .trust-inner { flex-direction: column; gap: 10px; }
+      .trust-divider { display: none; }
+      .products-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+  🐾 Free Next-Day Delivery Available<span>|</span>Now Accepting Online Grooming Bookings<span>|</span>Earn Points With Every Purchase
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Cozy<span>Pets</span></a>
+    <ul class="nav-links">
+      <li><a href="#categories">Shop</a></li>
+      <li><a href="#grooming">Grooming</a></li>
+      <li><a href="#brands">Brands</a></li>
+      <li><a href="#loyalty">Rewards</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://cozypets242.com" class="nav-cta">Shop Now →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Nassau's Favorite Pet Store</div>
+    <h1>Everything your<br/>pet <em>loves,</em><br/>delivered to you.</h1>
+    <p class="hero-desc">
+      Premium pet food, accessories, grooming services, and more — all under one roof at CozyPets. Serving Nassau with love since day one.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://cozypets242.com" class="btn-primary">Shop Products</a>
+      <a href="#grooming" class="btn-ghost">Book Grooming</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">10+</div>
+        <div class="hero-stat-label">Trusted Brands</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Pet Categories</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Grooming Plans</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="float-badge float-badge-1">
+        <span class="fb-num">Free</span>
+        Next-Day Delivery
+      </div>
+      <div class="float-badge float-badge-2">
+        <span class="fb-num">🏆</span>
+        Loyalty Rewards
+      </div>
+      <div class="hero-card">
+        <span class="paw-icon">🐾</span>
+        <div class="hero-card-title">Your Pet Deserves the Best</div>
+        <div class="hero-card-sub">Cats · Dogs · Birds · Aquatic · Farm</div>
+        <div class="services-grid">
+          <div class="service-pill">
+            <span class="sp-icon">🛁</span>
+            <span class="sp-name">Grooming</span>
+          </div>
+          <div class="service-pill">
+            <span class="sp-icon">🍖</span>
+            <span class="sp-name">Premium Food</span>
+          </div>
+          <div class="service-pill">
+            <span class="sp-icon">🎀</span>
+            <span class="sp-name">Accessories</span>
+          </div>
+          <div class="service-pill">
+            <span class="sp-icon">🚚</span>
+            <span class="sp-name">Delivery</span>
+          </div>
+        </div>
+        <div class="hero-card-badge">
+          📍 One West Plaza, Nassau &nbsp;·&nbsp; <span>Mon–Sat 10am–6pm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="ti-icon">🚚</span><span class="ti-text">Free Next-Day Delivery</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="ti-icon">🏪</span><span class="ti-text">In-Store Pickup Available</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="ti-icon">⛵</span><span class="ti-text">Mailboat Delivery</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="ti-icon">💳</span><span class="ti-text">Visa & Mastercard Accepted</span></div>
+    <div class="trust-divider"></div>
+    <div class="trust-item"><span class="ti-icon">⭐</span><span class="ti-text">Earn Loyalty Points</span></div>
+  </div>
+</div>
+
+<!-- Categories -->
+<section class="categories-section" id="categories">
+  <div class="section-inner">
+    <div class="categories-header reveal">
+      <div class="section-tag">What We Carry</div>
+      <h2 class="section-title">Shop by <em>Category</em></h2>
+      <p class="section-sub">From dogs and cats to birds, fish, and farm animals — we stock everything your pets need to thrive.</p>
+    </div>
+    <div class="cat-grid">
+      <a href="https://cozypets242.com" class="cat-card reveal">
+        <span class="cat-emoji">🐕</span>
+        <div class="cat-name">Dogs</div>
+        <div class="cat-count">Food, Toys, Collars & More</div>
+      </a>
+      <a href="https://cozypets242.com" class="cat-card reveal">
+        <span class="cat-emoji">🐈</span>
+        <div class="cat-name">Cats</div>
+        <div class="cat-count">Food, Litter, Accessories</div>
+      </a>
+      <a href="https://cozypets242.com" class="cat-card reveal">
+        <span class="cat-emoji">🐦</span>
+        <div class="cat-name">Birds</div>
+        <div class="cat-count">Cockatiels, Lovebirds & More</div>
+      </a>
+      <a href="https://cozypets242.com" class="cat-card reveal">
+        <span class="cat-emoji">🐠</span>
+        <div class="cat-name">Aquatic</div>
+        <div class="cat-count">Fish, Tanks & Supplies</div>
+      </a>
+      <a href="https://cozypets242.com" class="cat-card reveal">
+        <span class="cat-emoji">🐄</span>
+        <div class="cat-name">Farm</div>
+        <div class="cat-count">Feed & Farm Essentials</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Why CozyPets -->
+<section class="why-section">
+  <div class="section-inner">
+    <div class="why-layout">
+      <div class="why-visual reveal">
+        <div class="why-main-card">
+          <div class="why-big-num">Nassau's<br/>#1</div>
+          <div class="why-big-label">Local Pet Store<br/>Trusted by Families</div>
+        </div>
+        <div class="why-accent-cards">
+          <div class="why-acc-card">
+            <span class="why-acc-icon">🎯</span>
+            <div class="why-acc-title">Expert Advice</div>
+            <div class="why-acc-sub">Species-specific guidance from our knowledgeable team</div>
+          </div>
+          <div class="why-acc-card">
+            <span class="why-acc-icon">💰</span>
+            <div class="why-acc-title">Best Value</div>
+            <div class="why-acc-sub">Premium brands at fair prices, every day</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="section-tag">Why Choose Us</div>
+        <h2 class="section-title">We care for pets<br/><em>like family</em></h2>
+        <p class="section-sub">At CozyPets, we go beyond selling products — we're your partner in giving your animals the happiest, healthiest lives possible.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-item-num">01</div>
+            <div>
+              <div class="why-item-title">Premium Brands You Trust</div>
+              <div class="why-item-desc">We stock only proven, vet-recommended brands — from Purina Pro Plan and Royal Canin to Blue Buffalo and IAMS — so you never have to compromise.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-num">02</div>
+            <div>
+              <div class="why-item-title">Convenient Delivery Options</div>
+              <div class="why-item-desc">Free next-day delivery, in-store pickup, or mailboat delivery — choose what works best for you and your family.</div>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-num">03</div>
+            <div>
+              <div class="why-item-title">Professional Grooming Services</div>
+              <div class="why-item-desc">From a simple bath and blow-dry to a full breed-specific cut — our groomers keep your dog looking and feeling their absolute best.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Grooming Section -->
+<section class="grooming-section" id="grooming">
+  <div class="section-inner">
+    <div class="grooming-header reveal">
+      <div class="section-tag" style="background:rgba(244,124,32,0.2);color:var(--orange-light);border-color:rgba(244,124,32,0.3);">Professional Grooming</div>
+      <h2 class="section-title">Our Dog Grooming <em>Plans</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6);">Three carefully designed packages for every dog's needs. Book online and let our experts handle the rest.</p>
+    </div>
+    <div class="grooming-plans">
+      <div class="g-plan reveal">
+        <div class="g-plan-name">Cozy Clean</div>
+        <div class="g-plan-desc">Bath &amp; blow dry only. Perfect for a quick refresh between full grooms.</div>
+        <div class="g-prices">
+          <div class="g-price-row"><span class="g-size">Small</span><span class="g-price">$75</span></div>
+          <div class="g-price-row"><span class="g-size">Medium</span><span class="g-price">$90</span></div>
+          <div class="g-price-row"><span class="g-size">Large</span><span class="g-price">$110</span></div>
+          <div class="g-price-row"><span class="g-size">X-Large</span><span class="g-price">$130</span></div>
+        </div>
+        <a href="https://cozypets242.com/grooming" class="g-book-btn">Book This Plan</a>
+      </div>
+      <div class="g-plan featured reveal">
+        <div class="g-plan-badge">Most Popular</div>
+        <div class="g-plan-name">Cozy Care</div>
+        <div class="g-plan-desc">Bath, blow dry, nail trim, ear cleaning &amp; sanitary trim — the full refresh.</div>
+        <div class="g-prices">
+          <div class="g-price-row"><span class="g-size">Small</span><span class="g-price">$80</span></div>
+          <div class="g-price-row"><span class="g-size">Medium</span><span class="g-price">$95</span></div>
+          <div class="g-price-row"><span class="g-size">Large</span><span class="g-price">$120</span></div>
+          <div class="g-price-row"><span class="g-size">X-Large</span><span class="g-price">$135</span></div>
+        </div>
+        <a href="https://cozypets242.com/grooming" class="g-book-btn">Book This Plan</a>
+      </div>
+      <div class="g-plan reveal">
+        <div class="g-plan-name">Cozy Couture</div>
+        <div class="g-plan-desc">Everything in Cozy Care + breed-specific cut, hand scissoring &amp; stylish finish.</div>
+        <div class="g-prices">
+          <div class="g-price-row"><span class="g-size">Small</span><span class="g-price">$85</span></div>
+          <div class="g-price-row"><span class="g-size">Medium</span><span class="g-price">$105</span></div>
+          <div class="g-price-row"><span class="g-size">Large</span><span class="g-price">$125</span></div>
+          <div class="g-price-row"><span class="g-size">X-Large</span><span class="g-price">$140</span></div>
+        </div>
+        <a href="https://cozypets242.com/grooming" class="g-book-btn">Book This Plan</a>
+      </div>
+    </div>
+    <p class="grooming-note">
+      ✦ Prices are starting from and may vary depending on coat condition &amp; additional services required.<br/>
+      Book online at <a href="https://cozypets242.com/grooming">www.cozypets242.com/grooming</a>
+    </p>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="products-section">
+  <div class="section-inner">
+    <div class="products-header reveal">
+      <div>
+        <div class="section-tag">Featured Products</div>
+        <h2 class="section-title">Our Top <em>Picks</em></h2>
+      </div>
+      <a href="https://cozypets242.com" class="view-all-link">View All Products →</a>
+    </div>
+    <div class="products-grid">
+      <div class="prod-card reveal">
+        <div class="prod-img-wrap">🐾<div class="prod-badge">Hot</div></div>
+        <div class="prod-info">
+          <div class="prod-cat">Dogs</div>
+          <div class="prod-name">Kong Classic Dog Toy</div>
+          <div class="prod-login">Login to see price</div>
+          <a href="https://cozypets242.com" class="prod-btn">View Product</a>
+        </div>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-img-wrap">🐱<div class="prod-badge">Hot</div></div>
+        <div class="prod-info">
+          <div class="prod-cat">Cats</div>
+          <div class="prod-name">IAMS Proactive Health Turkey Dry Cat Food 6lb</div>
+          <div class="prod-login">Login to see price</div>
+          <a href="https://cozypets242.com" class="prod-btn">View Product</a>
+        </div>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-img-wrap">🦴<div class="prod-badge">Hot</div></div>
+        <div class="prod-info">
+          <div class="prod-cat">Dogs</div>
+          <div class="prod-name">Blue Buffalo Freedom Grain-Free Dry Dog Food 4lb</div>
+          <div class="prod-login">Login to see price</div>
+          <a href="https://cozypets242.com" class="prod-btn">View Product</a>
+        </div>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-img-wrap">🌿<div class="prod-badge">Hot</div></div>
+        <div class="prod-info">
+          <div class="prod-cat">Cats</div>
+          <div class="prod-name">Dr. Elsey's Precious Cat Ultra Unscented Clumping Litter 40lb</div>
+          <div class="prod-login">Login to see price</div>
+          <a href="https://cozypets242.com" class="prod-btn">View Product</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brands -->
+<section class="brands-section" id="brands">
+  <div class="section-inner">
+    <div class="brands-header reveal">
+      <div class="section-tag">Trusted Brands</div>
+      <h2 class="section-title">We carry the brands<br/>you <em>already love</em></h2>
+    </div>
+    <div class="brands-ticker-wrap">
+      <div class="brands-ticker" id="brandsTicker">
+        <div class="brand-pill">Fancy Feast</div>
+        <div class="brand-pill">Friskies</div>
+        <div class="brand-pill">Purina Pro Plan</div>
+        <div class="brand-pill">Purina ONE</div>
+        <div class="brand-pill">Tidy Cats</div>
+        <div class="brand-pill">NutriSource</div>
+        <div class="brand-pill">Blue Buffalo</div>
+        <div class="brand-pill">Royal Canin</div>
+        <div class="brand-pill">Fresh Step</div>
+        <div class="brand-pill">IAMS</div>
+        <div class="brand-pill">Hill's Science Diet</div>
+        <!-- Duplicates for seamless loop -->
+        <div class="brand-pill">Fancy Feast</div>
+        <div class="brand-pill">Friskies</div>
+        <div class="brand-pill">Purina Pro Plan</div>
+        <div class="brand-pill">Purina ONE</div>
+        <div class="brand-pill">Tidy Cats</div>
+        <div class="brand-pill">NutriSource</div>
+        <div class="brand-pill">Blue Buffalo</div>
+        <div class="brand-pill">Royal Canin</div>
+        <div class="brand-pill">Fresh Step</div>
+        <div class="brand-pill">IAMS</div>
+        <div class="brand-pill">Hill's Science Diet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Loyalty Program -->
+<section class="loyalty-section" id="loyalty">
+  <div class="loyalty-inner">
+    <div class="loyalty-left reveal">
+      <div class="section-tag" style="background:rgba(244,124,32,0.2);color:var(--orange-light);border-color:rgba(244,124,32,0.3);">Rewards Program</div>
+      <h2 class="section-title">Every visit<br/><em>counts</em></h2>
+      <p class="section-sub">Our loyalty program rewards you for every purchase — no cards, no hassle. You're added to the system automatically.</p>
+      <div class="loyalty-features">
+        <div class="lf-item">
+          <div class="lf-dot"></div>
+          <div class="lf-text"><strong>Earn points with every transaction</strong> — the more you shop, the more you save.</div>
+        </div>
+        <div class="lf-item">
+          <div class="lf-dot"></div>
+          <div class="lf-text"><strong>Exclusive member discounts</strong> on select products and grooming packages throughout the year.</div>
+        </div>
+        <div class="lf-item">
+          <div class="lf-dot"></div>
+          <div class="lf-text"><strong>Bonus point events</strong> — look out for special promotions where your points multiply.</div>
+        </div>
+        <div class="lf-item">
+          <div class="lf-dot"></div>
+          <div class="lf-text"><strong>No physical card needed</strong> — customers are added directly to our system for seamless tracking.</div>
+        </div>
+      </div>
+    </div>
+    <div class="loyalty-right reveal">
+      <div class="loyalty-card">
+        <span class="lc-icon">⭐</span>
+        <div class="lc-title">CozyPets Rewards</div>
+        <div class="lc-sub">Join hundreds of loyal pet owners who save more with every visit.</div>
+        <div class="lc-perks">
+          <div class="lc-perk">Points earned on every dollar spent</div>
+          <div class="lc-perk">Member-only pricing &amp; offers</div>
+          <div class="lc-perk">Bonus events throughout the year</div>
+          <div class="lc-perk">No card needed – auto-enrolled</div>
+        </div>
+        <a href="https://cozypets242.com" class="lc-btn">Start Earning Today →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery Options -->
+<section class="delivery-section">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag">Delivery &amp; Pickup</div>
+      <h2 class="section-title">Shop your way,<br/><em>we'll handle the rest</em></h2>
+      <p class="section-sub" style="margin:0 auto;">Flexible fulfillment options designed for the Bahamian lifestyle — whether you're on the island or not.</p>
+    </div>
+    <div class="delivery-grid">
+      <div class="del-card reveal">
+        <span class="del-icon">🚚</span>
+        <div class="del-title">Free Next-Day Delivery</div>
+        <div class="del-desc">Order today, receive tomorrow. <strong>Free delivery</strong> on all online orders within Nassau — no minimum spend required.</div>
+      </div>
+      <div class="del-card reveal">
+        <span class="del-icon">🏪</span>
+        <div class="del-title">In-Store Pickup</div>
+        <div class="del-desc">Order online and pick up at <strong>One West Plaza, Windsor Field Road</strong>. Ready within the hour on most items.</div>
+      </div>
+      <div class="del-card reveal">
+        <span class="del-icon">⛵</span>
+        <div class="del-title">Mailboat Delivery</div>
+        <div class="del-desc">On the Family Islands? No problem. We <strong>ship via mailboat</strong> so every pet in the Bahamas can enjoy CozyPets products.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Waterproof Collar Highlight -->
+<section class="collar-section">
+  <div class="section-inner">
+    <div class="collar-layout">
+      <div class="collar-visual reveal">
+        <span class="collar-emoji">🐶</span>
+        <div class="collar-visual-title">Waterproof Dog Collars</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:0.9rem;margin-top:8px;position:relative;z-index:1;">Available in 6 beautiful colors</p>
+        <div class="collar-colors">
+          <div class="color-dot" style="background:#8BC4A8;" title="Sage"></div>
+          <div class="color-dot" style="background:#F08080;" title="Coral"></div>
+          <div class="color-dot" style="background:#4AB8C1;" title="Harbor Blue"></div>
+          <div class="color-dot" style="background:#C8B8D8;" title="Lilac"></div>
+          <div class="color-dot" style="background:#7B4F3A;" title="Mocha"></div>
+          <div class="color-dot" style="background:#1a1a1a;" title="Onyx"></div>
+        </div>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.78rem;margin-top:18px;position:relative;z-index:1;">Choose between Gold or Silver Hardware</p>
+      </div>
+      <div class="reveal">
+        <div class="section-tag">Featured Product</div>
+        <h2 class="section-title">Built for<br/><em>adventure</em></h2>
+        <p class="section-sub" style="margin-bottom:32px;">Our signature waterproof collars are made for dogs who live life to the fullest — beach-ready, sweat-proof, and built to last.</p>
+        <div class="collar-features">
+          <div class="cf-item">
+            <div class="cf-icon">💧</div>
+            <div>
+              <div class="cf-title">100% Waterproof</div>
+              <div class="cf-desc">Perfect for beach days, rain walks, and everything in between — it dries instantly and never absorbs odors.</div>
+            </div>
+          </div>
+          <div class="cf-item">
+            <div class="cf-icon">🛡️</div>
+            <div>
+              <div class="cf-title">Odor-Resistant &amp; Durable</div>
+              <div class="cf-desc">Engineered to resist bacteria buildup, keeping your dog's neck fresh and the collar looking brand new.</div>
+            </div>
+          </div>
+          <div class="cf-item">
+            <div class="cf-icon">✨</div>
+            <div>
+              <div class="cf-title">Easy to Clean</div>
+              <div class="cf-desc">Simply rinse with water and wipe dry. No more soaking or scrubbing — more time for walks, less time cleaning.</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://cozypets242.com" class="btn-primary" style="margin-top:32px;display:inline-block;">Shop Collars →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <h2>Ready to spoil your pet<br/>the CozyPets way?</h2>
+    <p>Browse our full collection online, book a grooming appointment, or visit us in-store at One West Plaza. Your pet deserves the best — and we're here to deliver it.</p>
+    <div class="cta-buttons">
+      <a href="https://cozypets242.com" class="cta-btn-white">Shop Online Now</a>
+      <a href="https://cozypets242.com/grooming" class="cta-btn-outline">Book Grooming</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact & Footer Info -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:52px;">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">We'd love to <em>hear from you</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-brand reveal">
+        <div class="logo" style="font-size:2rem;">Cozy<span style="color:var(--orange);">Pets</span></div>
+        <p>Nassau's premier pet store — dedicated to the health, happiness, and comfort of every pet on the island. We treat your animals like family.</p>
+        <div class="contact-social">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="contact-col reveal">
+        <h4>Visit &amp; Contact</h4>
+        <div class="contact-item">
+          <span class="contact-item-icon">📍</span>
+          <div class="contact-item-text">
+            <strong>Our Store</strong>
+            One West Plaza, Windsor Field Road, Nassau, Bahamas
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">📞</span>
+          <div class="contact-item-text">
+            <strong>Phone</strong>
+            <a href="tel:2423611708" style="color:var(--orange);text-decoration:none;">242-361-1708</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🌐</span>
+          <div class="contact-item-text">
+            <strong>Website</strong>
+            <a href="https://cozypets242.com" style="color:var(--orange);text-decoration:none;">cozypets242.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🕐</span>
+          <div class="contact-item-text">
+            <strong>Store Hours</strong>
+            Monday – Saturday: 10:00 AM – 6:00 PM
+          </div>
+        </div>
+      </div>
+      <div class="contact-col reveal">
+        <h4>Quick Links</h4>
+        <ul class="contact-links">
+          <li><a href="https://cozypets242.com">Shop All Products</a></li>
+          <li><a href="https://cozypets242.com/grooming">Book Grooming</a></li>
+          <li><a href="#">Loyalty Rewards</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© CozyPets 2026. All rights reserved. Nassau, Bahamas.</span>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Returns</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger children in grid
+  document.querySelectorAll('.cat-grid, .grooming-plans, .products-grid, .delivery-grid').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+
+  // Sticky nav shadow
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+  });
+</script>
+
+</body>
+</html>

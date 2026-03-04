@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Pets - Your Pet's Best Friend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --amber-50: #fffbeb;
+            --amber-100: #fef3c7;
+            --amber-200: #fde68a;
+            --amber-400: #fbbf24;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --amber-700: #b45309;
+            --orange-400: #fb923c;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(to bottom, var(--amber-50), var(--white));
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav-top {
+            background: linear-gradient(to right, var(--amber-600), var(--orange-500));
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .nav-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-top-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-top-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-main {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-main.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--amber-500), var(--orange-600));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: var(--gray-500);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--amber-600);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid var(--gray-300);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--gray-600);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .icon-btn {
+            position: relative;
+            padding: 8px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+            color: var(--gray-700);
+        }
+
+        .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: var(--amber-500);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--amber-500), var(--orange-500));
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--amber-600), var(--orange-600));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            font-size: 80px;
+            pointer-events: none;
+        }
+
+        .hero-pattern span {
+            position: absolute;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--amber-100);
+            color: var(--amber-700);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge span {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h2 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--gray-900);
+        }
+
+        .hero h2 .gradient-text {
+            background: linear-gradient(to right, var(--amber-500), var(--orange-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray-600);
+            max-width: 500px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--amber-500);
+            color: var(--amber-600);
+        }
+
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trust-badge-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trust-badge-icon.green { background: #dcfce7; }
+        .trust-badge-icon.blue { background: #dbeafe; }
+        .trust-badge-icon.purple { background: #f3e8ff; }
+
+        .trust-badge span {
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-bg {
+            position: absolute;
+            inset: -20px;
+            background: linear-gradient(135deg, var(--amber-200), var(--orange-200));
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            transform: scale(1.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card.left {
+            left: -30px;
+            top: 25%;
+            animation-delay: 0s;
+        }
+
+        .floating-card.right {
+            right: -15px;
+            bottom: 30%;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .floating-card-icon.green { background: #dcfce7; }
+        .floating-card-icon.blue { background: #dbeafe; }
+
+        .floating-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .floating-card p {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        /* Value Section */
+        .value-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, var(--gray-50), var(--white));
+            border: 1px solid var(--gray-100);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            border-color: var(--amber-200);
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .value-card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .value-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--amber-50), var(--white));
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 3/4;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2), transparent);
+        }
+
+        .category-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            color: var(--white);
+        }
+
+        .category-count {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .category-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .category-card p {
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .category-card:hover p {
+            opacity: 0.8;
+            transform: translateY(0);
+        }
+
+        .btn-category {
+            background: var(--white);
+            color: var(--gray-900);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-category:hover {
+            background: var(--amber-500);
+            color: var(--white);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .products-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .products-header p {
+            font-size: 18px;
+            color: var(--gray-600);
+        }
+
+        .btn-outline-amber {
+            background: transparent;
+            color: var(--amber-600);
+            border: 2px solid var(--amber-500);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-amber:hover {
+            background: var(--amber-500);
+            color: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            position: relative;
+            background: var(--gray-100);
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: linear-gradient(to right, var(--amber-500), var(--orange-500));
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .product-quick-view {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .product-card:hover .product-quick-view {
+            background: rgba(0,0,0,0.1);
+            opacity: 1;
+        }
+
+        .btn-quick-view {
+            background: var(--white);
+            color: var(--gray-900);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-quick-view:hover {
+            background: var(--amber-500);
+            color: var(--white);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: var(--amber-600);
+            font-weight: 500;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 8px 0 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .product-name {
+            color: var(--amber-600);
+        }
+
+        .btn-add-cart {
+            width: 100%;
+            background: var(--gray-900);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--amber-500);
+        }
+
+        /* Pet Tips Section */
+        .tips-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--gray-50), var(--white));
+        }
+
+        .section-label {
+            color: var(--amber-600);
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .tip-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tip-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--amber-100);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .tip-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+
+        .tip-card p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .tip-link {
+            color: var(--amber-600);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tip-link:hover {
+            color: var(--amber-700);
+        }
+
+        .tip-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .tip-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Brand Partner Section */
+        .brand-section {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--amber-600), var(--orange-500));
+            color: var(--white);
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .brand-content h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .brand-content p {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .brand-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .brand-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .brand-list-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--amber-600);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-white:hover {
+            background: var(--gray-100);
+        }
+
+        .brand-stats {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 32px;
+        }
+
+        .brand-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .brand-stat {
+            background: rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .brand-stat h4 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .brand-stat p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--amber-50), var(--orange-50));
+            border: 1px solid var(--amber-100);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .star {
+            width: 20px;
+            height: 20px;
+            color: var(--amber-400);
+            fill: var(--amber-400);
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--gray-700);
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--amber-400), var(--orange-400));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        /* Rewards Section */
+        .rewards-section {
+            padding: 80px 0;
+            background: var(--gray-900);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rewards-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .rewards-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .rewards-bg-circle.amber {
+            background: var(--amber-500);
+            width: 400px;
+            height: 400px;
+            top: 0;
+            left: 25%;
+        }
+
+        .rewards-bg-circle.orange {
+            background: var(--orange-500);
+            width: 400px;
+            height: 400px;
+            bottom: 0;
+            right: 25%;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rewards-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--amber-400);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .rewards-content h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .rewards-content p {
+            font-size: 18px;
+            color: var(--gray-300);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .rewards-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .rewards-list li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            color: var(--gray-300);
+        }
+
+        .rewards-list-icon {
+            font-size: 24px;
+        }
+
+        .btn-rewards {
+            background: linear-gradient(to right, var(--amber-500), var(--orange-500));
+            color: var(--white);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-rewards:hover {
+            background: linear-gradient(to right, var(--amber-600), var(--orange-600));
+        }
+
+        .rewards-card {
+            background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            border: 1px solid var(--gray-700);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .rewards-card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--amber-400), var(--orange-500));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .rewards-card-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--white);
+        }
+
+        .rewards-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .rewards-card-balance {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--amber-400), var(--orange-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .rewards-card p {
+            color: var(--gray-400);
+            margin-bottom: 24px;
+        }
+
+        .rewards-progress {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .rewards-progress p {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-700);
+            border-radius: 50px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(to right, var(--amber-400), var(--orange-500));
+            border-radius: 50px;
+        }
+
+        .rewards-progress span {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--amber-50), var(--white));
+            text-align: center;
+        }
+
+        .newsletter-section h2 {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .newsletter-section p {
+            font-size: 18px;
+            color: var(--gray-600);
+            margin-bottom: 32px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto 16px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 24px;
+            border: 2px solid var(--gray-200);
+            border-radius: 50px 0 0 50px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--amber-500);
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(to right, var(--amber-500), var(--orange-500));
+            color: var(--white);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: linear-gradient(to right, var(--amber-600), var(--orange-600));
+        }
+
+        .newsletter-note {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 64px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .footer-brand p {
+            color: var(--gray-400);
+            margin: 16px 0 24px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--amber-500);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--amber-400);
+        }
+
+        .footer-contact li {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--gray-400);
+        }
+
+        .footer-contact svg {
+            width: 20px;
+            height: 20px;
+            color: var(--amber-400);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .payment-method {
+            background: var(--gray-800);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--gray-400);
+            font-size: 14px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: var(--gray-400);
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--amber-400);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 200;
+            padding: 80px 20px 20px;
+            flex-direction: column;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 16px 0;
+            font-size: 18px;
+            color: var(--gray-700);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--amber-600);
+        }
+
+        .mobile-menu .btn-primary {
+            margin-top: 24px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                margin: 0 auto 32px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .trust-badges {
+                justify-content: center;
+            }
+
+            .hero-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .value-grid,
+            .categories-grid,
+            .products-grid,
+            .tips-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .brand-grid,
+            .rewards-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .brand-content h2 {
+                font-size: 36px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-top-right,
+            .nav-btn {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .value-grid,
+            .categories-grid,
+            .products-grid,
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .brand-content h2,
+            .rewards-content h2 {
+                font-size: 28px;
+            }
+
+            .brand-stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .newsletter-input,
+            .newsletter-btn {
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-top">
+            <div class="container">
+                <div class="nav-top-left">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Free 24hr Shipping on Orders Over $50
+                </div>
+                <div class="nav-top-right">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                    (1242) 361-1708
+                </div>
+            </div>
+        </div>
+        <div class="nav-main" id="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">
+                        <div class="logo-icon">🐾</div>
+                        <div class="logo-text">
+                            <h1>Cozy Pets</h1>
+                            <span>Your Pet's Best Friend</span>
+                        </div>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#products">Shop</a></li>
+                        <li><a href="#categories">Cats</a></li>
+                        <li><a href="#categories">Dogs</a></li>
+                        <li><a href="#categories">Aquatic</a></li>
+                        <li><a href="#categories">Bird</a></li>
+                        <li><a href="#">Grooming</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <button class="nav-btn">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            Search
+                        </button>
+                        <button class="icon-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="icon-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="btn-primary">Login / Register</button>
+                        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="toggleMobileMenu()">Home</a>
+        <a href="#products" onclick="toggleMobileMenu()">Shop</a>
+        <a href="#categories" onclick="toggleMobileMenu()">Cats</a>
+        <a href="#categories" onclick="toggleMobileMenu()">Dogs</a>
+        <a href="#categories" onclick="toggleMobileMenu()">Aquatic</a>
+        <a href="#categories" onclick="toggleMobileMenu()">Bird</a>
+        <a href="#" onclick="toggleMobileMenu()">Grooming</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <button class="btn-primary">Login / Register</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pattern">
+            <span style="top: 80px; left: 40px;">🐾</span>
+            <span style="top: 160px; right: 80px;">🐱</span>
+            <span style="bottom: 160px; left: 25%;">🐕</span>
+            <span style="bottom: 80px; right: 33%;">🐦</span>
+        </div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>✨</span>
+                        Trusted by 10,000+ Pet Parents in the Bahamas
+                    </div>
+                    <h2>Everything Your <span class="gradient-text">Pets Need</span> Under One Roof</h2>
+                    <p>Premium pet food, expert grooming services, and quality supplies for your furry, feathered, and finned family members. We treat your pets like our own.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary btn-large">
+                            Shop Now
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                        <button class="btn-outline">Learn More</button>
+                    </div>
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon green">
+                                <svg width="20" height="20" fill="none" stroke="#16a34a" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span>Free 24hr Delivery</span>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon blue">
+                                <svg width="20" height="20" fill="none" stroke="#2563eb" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <span>Quality Guaranteed</span>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon purple">
+                                <svg width="20" height="20" fill="none" stroke="#9333ea" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span>Rewards Program</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-image-bg"></div>
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80" alt="Happy pets">
+                    <div class="floating-card left">
+                        <div class="floating-card-icon green">🐱</div>
+                        <div>
+                            <h4>Cats Love Us</h4>
+                            <p>500+ Happy Cats</p>
+                        </div>
+                    </div>
+                    <div class="floating-card right">
+                        <div class="floating-card-icon blue">🐕</div>
+                        <div>
+                            <h4>Dogs Approved</h4>
+                            <p>1000+ Wagging Tails</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section class="value-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Pet Parents Choose Cozy Pets</h2>
+                <p>We're more than just a pet store. We're your partner in pet parenthood, committed to helping you give your companions the best life possible.</p>
+            </div>
+            <div class="value-grid">
+                <div class="value-card">
+                    <span class="value-card-icon">🚚</span>
+                    <h3>Free 24hr Delivery</h3>
+                    <p>Get your pet essentials delivered to your door within 24 hours. Free shipping on orders over $50 across the Bahamas.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-card-icon">🏆</span>
+                    <h3>Premium Quality</h3>
+                    <p>We stock only the finest brands that meet our strict quality standards. Your pet deserves nothing less than the best.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-card-icon">💎</span>
+                    <h3>Rewards Program</h3>
+                    <p>Earn points with every purchase. Enjoy exclusive discounts, member-only offers, and bonus point events all year.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-card-icon">💬</span>
+                    <h3>Expert Support</h3>
+                    <p>Have questions? Our knowledgeable team is here to help with nutrition advice, product recommendations, and care tips.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shop by Pet Category</h2>
+                <p>Whether you have cats, dogs, birds, or aquatic pets, find everything they need in our carefully curated collections.</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" alt="Cats">
+                    <div class="category-card-overlay"></div>
+                    <div class="category-card-content">
+                        <span class="category-count">200+ Products</span>
+                        <h3>Cats</h3>
+                        <p>Premium food, toys & accessories for your feline friends</p>
+                        <button class="btn-category">
+                            Shop Cats
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Dogs">
+                    <div class="category-card-overlay"></div>
+                    <div class="category-card-content">
+                        <span class="category-count">350+ Products</span>
+                        <h3>Dogs</h3>
+                        <p>Everything your loyal companion needs to thrive</p>
+                        <button class="btn-category">
+                            Shop Dogs
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80" alt="Birds">
+                    <div class="category-card-overlay"></div>
+                    <div class="category-card-content">
+                        <span class="category-count">120+ Products</span>
+                        <h3>Birds</h3>
+                        <p>Cages, feed & supplies for feathered friends</p>
+                        <button class="btn-category">
+                            Shop Birds
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&q=80" alt="Aquatic">
+                    <div class="category-card-overlay"></div>
+                    <div class="category-card-content">
+                        <span class="category-count">180+ Products</span>
+                        <h3>Aquatic</h3>
+                        <p>Tanks, food & care for your underwater world</p>
+                        <button class="btn-category">
+                            Shop Aquatic
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="products-header">
+                <div>
+                    <h2>Featured Products</h2>
+                    <p>Hand-picked favorites our customers love</p>
+                </div>
+                <button class="btn-outline-amber">
+                    View All Products
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&q=80" alt="Cat Food">
+                        <span class="product-badge">Best Seller</span>
+                        <div class="product-quick-view">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">CATS</span>
+                        <h3 class="product-name">IAMS Proactive Health Turkey Dry Cat Food 6 lb Bag</h3>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400&q=80" alt="Dog Toy">
+                        <span class="product-badge">Popular</span>
+                        <div class="product-quick-view">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">DOGS</span>
+                        <h3 class="product-name">Kong Classic Dog Toy - Durable Chew Toy</h3>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&q=80" alt="Dog Food">
+                        <span class="product-badge">Premium</span>
+                        <div class="product-quick-view">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">DOGS</span>
+                        <h3 class="product-name">Blue Buffalo Freedom Grain-Free Small Breed Dry Dog Food</h3>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?w=400&q=80" alt="Cat Litter">
+                        <span class="product-badge">Value Pack</span>
+                        <div class="product-quick-view">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">CATS</span>
+                        <h3 class="product-name">Dr. Elsey's Precious Cat Ultra Clumping Cat Litter 40lb</h3>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pet Tips Section -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">PET CARE RESOURCES</span>
+                <h2>Expert Tips for Happy, Healthy Pets</h2>
+                <p>Our team of pet experts shares valuable insights to help you provide the best care for your companions.</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🍖</div>
+                    <h3>Nutrition Guide</h3>
+                    <p>Learn about the best diet for your pet's specific breed, age, and health needs. Our experts break down ingredient labels and recommend top-quality options.</p>
+                    <a href="#" class="tip-link">
+                        Learn More
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">✂️</div>
+                    <h3>Grooming Essentials</h3>
+                    <p>Discover professional grooming tips to keep your pet looking and feeling their best. From brushing techniques to nail trimming, we've got you covered.</p>
+                    <a href="#" class="tip-link">
+                        Learn More
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🏥</div>
+                    <h3>Health & Wellness</h3>
+                    <p>Stay informed about preventive care, vaccination schedules, and common health issues. Early detection and proper care ensure a long, happy life.</p>
+                    <a href="#" class="tip-link">
+                        Learn More
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🎾</div>
+                    <h3>Exercise & Play</h3>
+                    <p>Keep your pets active and engaged with expert advice on exercise routines, mental stimulation, and the best toys for every personality.</p>
+                    <a href="#" class="tip-link">
+                        Learn More
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Partner Section -->
+    <section class="brand-section">
+        <div class="container">
+            <div class="brand-grid">
+                <div class="brand-content">
+                    <span class="brand-badge">Partner Brand</span>
+                    <h2>Hill's Science Diet</h2>
+                    <p>Find Hill's premium quality pet food at unbeatable prices. Scientifically formulated to meet your pet's specific nutritional needs at every life stage. Trusted by veterinarians worldwide for optimal health outcomes.</p>
+                    <ul class="brand-list">
+                        <li>
+                            <div class="brand-list-icon">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            Clinically proven antioxidant benefits
+                        </li>
+                        <li>
+                            <div class="brand-list-icon">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            Precisely balanced nutrition for all life stages
+                        </li>
+                        <li>
+                            <div class="brand-list-icon">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            High-quality ingredients with no artificial colors
+                        </li>
+                        <li>
+                            <div class="brand-list-icon">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            Recommended by veterinarians globally
+                        </li>
+                    </ul>
+                    <button class="btn-white">Shop Hill's Products</button>
+                </div>
+                <div class="brand-stats">
+                    <div class="brand-stats-grid">
+                        <div class="brand-stat">
+                            <h4>50+</h4>
+                            <p>Products</p>
+                        </div>
+                        <div class="brand-stat">
+                            <h4>100%</h4>
+                            <p>Natural</p>
+                        </div>
+                        <div class="brand-stat">
+                            <h4>Vet</h4>
+                            <p>Recommended</p>
+                        </div>
+                        <div class="brand-stat">
+                            <h4>Best</h4>
+                            <p>Prices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">TESTIMONIALS</span>
+                <h2>What Our Customers Say</h2>
+                <p>Join thousands of happy pet parents in the Bahamas</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                    </div>
+                    <p class="testimonial-text">"Cozy Pets has been my go-to store for years. Their selection of premium cat food is unmatched, and the staff actually knows what they're talking about!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Cat Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                    </div>
+                    <p class="testimonial-text">"The free next-day delivery saved me when I ran out of dog food. Amazing service and the loyalty program gives real value back. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">J</div>
+                        <div class="author-info">
+                            <h4>James Thompson</h4>
+                            <p>Dog Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                    </div>
+                    <p class="testimonial-text">"Finally found a store that carries quality bird supplies! My cockatiels love their new toys and the specialist advice was incredibly helpful."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Bird Owner</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section class="rewards-section">
+        <div class="rewards-bg">
+            <div class="rewards-bg-circle amber"></div>
+            <div class="rewards-bg-circle orange"></div>
+        </div>
+        <div class="container">
+            <div class="rewards-grid">
+                <div class="rewards-content">
+                    <span class="rewards-badge">REWARDS PROGRAM</span>
+                    <h2>Every Visit Counts!</h2>
+                    <p>Join our loyalty program and start earning rewards with every purchase. No cards to carry — your account is automatically linked to our system.</p>
+                    <ul class="rewards-list">
+                        <li>
+                            <span class="rewards-list-icon">💰</span>
+                            Earn points with every transaction
+                        </li>
+                        <li>
+                            <span class="rewards-list-icon">🎁</span>
+                            Enjoy exclusive discounts and member-only offers
+                        </li>
+                        <li>
+                            <span class="rewards-list-icon">🎉</span>
+                            Bonus point events throughout the year
+                        </li>
+                        <li>
+                            <span class="rewards-list-icon">📱</span>
+                            No cards needed — automatic enrollment
+                        </li>
+                    </ul>
+                    <button class="btn-rewards">Join Rewards Program</button>
+                </div>
+                <div class="rewards-card">
+                    <div class="rewards-card-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3>Points Balance</h3>
+                    <p class="rewards-card-balance">2,450</p>
+                    <p>= $24.50 in rewards</p>
+                    <div class="rewards-progress">
+                        <p>Next Reward</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span>550 points until $5 reward</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2>Stay Connected</h2>
+            <p>Subscribe to our newsletter for exclusive deals, pet care tips, and new product announcements.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+            <p class="newsletter-note">By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">🐾</div>
+                        <div class="logo-text">
+                            <h1 style="color: white;">Cozy Pets</h1>
+                            <span style="color: var(--gray-400);">Your Pet's Best Friend</span>
+                        </div>
+                    </div>
+                    <p>At Cozy Pets, we care for your furry, feathered, and finned friends just like family. Everything your pet needs under one roof.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>One West Plaza Windsor Field Road Nassau, Bahamas</span>
+                        </li>
+                        <li>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span>(1242) 361-1708</span>
+                        </li>
+                        <li>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>info@cozypets242.com</span>
+                        </li>
+                    </ul>
+                    <div class="payment-methods">
+                        <span class="payment-method">Visa</span>
+                        <span class="payment-method">MasterCard</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Cozy Pets 242. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
